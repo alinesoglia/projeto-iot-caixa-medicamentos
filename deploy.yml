@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./my-website  # Ajuste para o diretório do seu site Docusaurus
+        working-directory:   # Ajuste para o diretório do seu site Docusaurus
     steps:
       # 1️⃣ Clona o repositório
       - name: Checkout repository
