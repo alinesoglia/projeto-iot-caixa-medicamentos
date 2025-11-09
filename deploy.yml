@@ -1,0 +1,44 @@
+name: 🚀 Deploy Docusaurus to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # ou 'master', se seu branch principal tiver esse nome
+
+permissions:
+  contents: write  # Permite o GitHub Actions fazer push no branch gh-pages
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./my-website  # Ajuste para o diretório do seu site Docusaurus
+    steps:
+      # 1️⃣ Clona o repositório
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      # 2️⃣ Instala o Node
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24' # ou a versão que você usa localmente
+
+      # 3️⃣ Instala dependências
+      - name: Install dependencies
+        run: npm install
+
+      # 4️⃣ Gera o build
+      - name: Build Docusaurus site
+        run: npm run build
+
+      # 5️⃣ Faz o deploy no branch gh-pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          publish_branch: gh-pages
