@@ -6,6 +6,10 @@
 }
 
 .featureSvg {
-  height: 200px;
+  /* força o SVG a caber dentro de 200x200 sem ultrapassar */
   width: 200px;
+  height: 200px;
+  max-width: 200px;
+  max-height: 200px;
+
 }
